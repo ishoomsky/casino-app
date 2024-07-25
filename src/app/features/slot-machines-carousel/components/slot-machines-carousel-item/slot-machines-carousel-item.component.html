@@ -6,7 +6,7 @@
     *ngIf="slot.isLocked"
     [ngTemplateOutlet]="isLocketBadgeTemplate"
   />
-  <img class="carousel-item-image" [src]="slot.image" [alt]="slot.name">
+  <img class="carousel-item-image" draggable="false" [src]="slot.image" [alt]="slot.name">
 </div>
 
 <ng-template #jackpotTemplate>

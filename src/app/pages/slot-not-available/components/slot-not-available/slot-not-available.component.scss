@@ -1,0 +1,40 @@
+@import '../../../../../styles/mixins';
+@import '../../../../../styles/variables';
+@import '../../../../../styles/functions';
+
+
+
+:host {
+  @include page-background;
+  background-image: url('/images/slot/game_background.jpg');
+
+  .message {
+    @include flex-center;
+    flex-direction: column;
+    gap: 30px;
+    width: 50vw;
+    height: 50vh;
+    background: color-with-opacity($white, 0.7);
+    border: 2px solid $gold;
+    border-radius: 29px;
+    font-size: 48px;
+    color: $dark-red;
+    text-align: center;
+
+
+    .navigate-control {
+      cursor: pointer;
+      padding: 10px 20px;
+      background-color: transparent;
+      transition: background-color 0.2s;
+      border: 3px solid $dark-red;
+      border-radius: 29px;
+      font-size: 36px;
+      color: $dark-red;
+
+      &:hover {
+        background-color: color-with-opacity($gold, 0.5);
+      }
+    }
+  }
+}

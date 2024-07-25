@@ -11,7 +11,7 @@ export const routes: Routes = [
   },
   {
     path: 'slot-not-found/:slotId',
-    loadChildren: () => import('./pages/slot-not-found/slot-not-found.route').then(feature => feature.slotNotFoundRoute),
+    loadChildren: () => import('./pages/slot-not-available/slot-not-available.route').then(feature => feature.slotNotAvailableRoute),
   },
   {
     path: '**',
