@@ -1,6 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { AppDataService } from "../../shared/services/app-data/app-data.service";
-import { filter, map } from "rxjs";
+import { AppDataService } from "../../../shared/services/app-data/app-data.service";
 
 @Injectable()
 export class LobbyService {

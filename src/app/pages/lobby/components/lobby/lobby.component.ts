@@ -8,12 +8,12 @@ import {
 import { NgStyle } from "@angular/common";
 import { LobbyService } from "../../services/lobby.service";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
-import { SlotInterface } from "../../../shared/types/slot.interface";
+import { AudioPlayerService } from "../../../../features/audio-player/services/audio-player.service";
+import { SlotInterface } from "../../../../shared/types/slot.interface";
+import { AudioPlayerComponent } from "../../../../features/audio-player/components/audio-player/audio-player.component";
 import {
   SlotMachinesCarouselComponent
-} from "../../../features/slot-machines-carousel/components/slot-machines-carousel/slot-machines-carousel.component";
-import { AudioPlayerService } from "../../../features/audio-player/services/audio-player.service";
-import { AudioPlayerComponent } from "../../../features/audio-player/components/audio-player/audio-player.component";
+} from "../../../../features/slot-machines-carousel/components/slot-machines-carousel/slot-machines-carousel.component";
 
 @Component({
   selector: 'app-lobby',
