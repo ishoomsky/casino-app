@@ -1,8 +1,6 @@
-<div class="audio-player-button">
-  <button
-    (click)="audioPlayerService.togglePlayer()"
-    [appImageButton]="(isMuted$ | async) ? '/images/lobby/mute-icon.png' : '/images/lobby/sound-on-icon.png'"
-    [height]="(isMuted$ | async) ? '30' : '41'"
-    [width]="(isMuted$ | async) ? '38' : '39'"
-  ></button>
-</div>
+<button
+  (click)="audioPlayerService.togglePlayer()"
+  [appImageButton]="(isMuted$ | async) ? muteIconProps.url : soundOnIconProps.url"
+  [height]="(isMuted$ | async) ? muteIconProps.height : soundOnIconProps.height"
+  [width]="(isMuted$ | async) ? muteIconProps.width : soundOnIconProps.width"
+></button>

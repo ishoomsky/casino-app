@@ -16,6 +16,17 @@ import { ImageButtonDirective } from "../../../../shared/directives/image-button
 })
 export class AudioPlayerComponent {
   public audioPlayerService = inject(AudioPlayerService);
-
   public isMuted$ = this.audioPlayerService.isMuted$;
+
+  public muteIconProps = {
+    url: '/images/lobby/mute-icon.png',
+    height: '30',
+    width: '38',
+  };
+
+  public soundOnIconProps = {
+    url: '/images/lobby/sound-on-icon.png',
+    height: '41',
+    width: '39',
+  }
 }

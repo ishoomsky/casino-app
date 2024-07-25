@@ -1,11 +1,13 @@
-.audio-player-button {
+@import '../../../../../styles/variables';
+@import '../../../../../styles/functions';
+
+:host {
   max-width: 46px;
   display: block;
   padding: 0 3px;
   box-shadow:
-    inset 0px -5px 5px -1px rgba(0, 0, 0, 0.7),
-    inset 0px 9px 6px -5px rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(41, 9, 6, 1);
+    inset 0px -5px 5px -1px color-with-opacity($black, 0.7),
+    inset 0px 9px 6px -5px color-with-opacity($white, 0.9);
+  border: 1px solid $dark-red;
   border-radius: 9px;
-  transition: background 0.3s, box-shadow 0.3s;
 }

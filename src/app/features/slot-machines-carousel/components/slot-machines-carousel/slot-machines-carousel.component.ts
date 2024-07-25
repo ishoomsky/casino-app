@@ -35,7 +35,7 @@ export class SlotMachinesCarouselComponent implements OnInit {
   private updateScrollPosition(): void {
     const wrapper = this.wrapperRef.nativeElement as HTMLElement;
     const firstChild = this.slotRefs.first.nativeElement as HTMLElement;
-    const widthEl = firstChild.offsetWidth + parseInt(getComputedStyle(wrapper).gridGap);
+    const widthEl = firstChild.offsetWidth + parseInt(getComputedStyle(wrapper).gap);
     wrapper.style.left = `-${this.totalScroll * widthEl}px`;
     wrapper.style.transition = '.3s';
   }

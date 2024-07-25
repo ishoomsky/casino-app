@@ -9,24 +9,24 @@
     justify-content: center;
 
     &-value {
-      color: white;
       font-family: 'CorpoSansSemiBold';
       font-size: 15px;
+      color: white;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     }
   }
 
   .carousel-item-badge {
     position: absolute;
-    width: 193px;
     z-index: 2;
     top: 50%;
     transform: translateY(-50%);
+    width: 193px;
   }
 
   &:not(.locked):hover {
     .carousel-item-image {
-      filter: drop-shadow(5px 5px 5px #FFFFFF);
+      filter: drop-shadow(7px 7px 7px #FFFFFF);
       cursor: pointer;
     }
   }

@@ -1,0 +1,8 @@
+@function color-with-opacity($color, $opacity) {
+  @if type-of($color) == color and (rgba($color, 1) == $color) {
+    @return rgba($color, $opacity);
+  } @else {
+    $current-opacity: alpha($color);
+    @return rgba(red($color), green($color), blue($color), $opacity);
+  }
+}
