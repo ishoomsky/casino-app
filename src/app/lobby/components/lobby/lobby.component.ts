@@ -13,6 +13,7 @@ import {
   SlotMachinesCarouselComponent
 } from "../../../features/slot-machines-carousel/components/slot-machines-carousel/slot-machines-carousel.component";
 import { AudioPlayerService } from "../../../features/audio-player/services/audio-player.service";
+import { AudioPlayerComponent } from "../../../features/audio-player/components/audio-player/audio-player.component";
 
 @Component({
   selector: 'app-lobby',
@@ -20,6 +21,7 @@ import { AudioPlayerService } from "../../../features/audio-player/services/audi
   imports: [
     NgStyle,
     SlotMachinesCarouselComponent,
+    AudioPlayerComponent,
   ],
   templateUrl: './lobby.component.html',
   styleUrl: './lobby.component.scss',
@@ -40,7 +42,8 @@ export class LobbyComponent implements OnInit {
       .subscribe((lobbyData) => {
         if (lobbyData) {
           this.backgroundImage = `url(${lobbyData.backgroundImage})`;
-          this.slots = lobbyData.slots;
+          this.slots = lobbyData.slots
+            .sort((slotA, slotB) => slotA.order - slotB.order);
 
           this.audioPlayerService.setSource(lobbyData.backgroundMusic);
         }

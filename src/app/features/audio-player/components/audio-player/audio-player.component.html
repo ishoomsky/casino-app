@@ -1,0 +1,8 @@
+<div class="audio-player-button">
+  <button
+    (click)="audioPlayerService.togglePlayer()"
+    [appImageButton]="(isMuted$ | async) ? '/images/lobby/mute-icon.png' : '/images/lobby/sound-on-icon.png'"
+    [height]="(isMuted$ | async) ? '30' : '41'"
+    [width]="(isMuted$ | async) ? '38' : '39'"
+  ></button>
+</div>
