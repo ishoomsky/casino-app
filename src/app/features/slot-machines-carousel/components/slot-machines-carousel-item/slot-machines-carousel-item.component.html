@@ -1,4 +1,6 @@
-<div class="carousel-item" [ngClass]="{'locked': slot.isLocked}">
+<div class="carousel-item" [ngClass]="{'locked': slot.isLocked}"
+     [routerLink]="!slot.isLocked ? ['/slot', slot.id] : null"
+>
   <ng-container [ngTemplateOutlet]="jackpotTemplate"/>
   <ng-container
     *ngIf="slot.isLocked"

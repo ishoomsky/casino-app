@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { SlotInterface } from "../../../../shared/types/slot.interface";
 import { AnimateNumberDirective } from "../../../../shared/directives/animate-number/animate-number.directive";
 import { NgClass, NgIf, NgStyle, NgTemplateOutlet } from "@angular/common";
+import { RouterLink } from "@angular/router";
 
 interface BadgePosition {
   top: number;
@@ -16,6 +17,7 @@ interface BadgePosition {
     NgTemplateOutlet,
     NgClass,
     NgStyle,
+    RouterLink,
   ],
   templateUrl: './slot-machines-carousel-item.component.html',
   styleUrl: './slot-machines-carousel-item.component.scss'
