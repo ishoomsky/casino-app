@@ -1,0 +1,14 @@
+<div class="image-container">
+  @if (slot.jackpot) {
+    <div class="jackpot-container">
+      <span
+        class="jackpot-value"
+        [appAnimateNumber]="slot.jackpot"
+        [duration]="1200"
+      >
+<!--        {{ | commaSeparatorFormatter}}-->
+      </span>
+    </div>
+  }
+  <img [src]="slot.image" [alt]="slot.name">
+</div>

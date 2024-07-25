@@ -9,20 +9,26 @@ import { NgStyle } from "@angular/common";
 import { LobbyService } from "../../services/lobby.service";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { SlotInterface } from "../../../shared/types/slot.interface";
+import {
+  SlotMachinesCarouselComponent
+} from "../../../features/slot-machines-carousel/components/slot-machines-carousel/slot-machines-carousel.component";
+import { AudioPlayerService } from "../../../features/audio-player/services/audio-player.service";
 
 @Component({
   selector: 'app-lobby',
   standalone: true,
   imports: [
-    NgStyle
+    NgStyle,
+    SlotMachinesCarouselComponent,
   ],
   templateUrl: './lobby.component.html',
   styleUrl: './lobby.component.scss',
-  providers: [LobbyService],
+  providers: [LobbyService, AudioPlayerService],
 })
 export class LobbyComponent implements OnInit {
   private lobbyService = inject(LobbyService);
   private destroyRef = inject(DestroyRef);
+  public audioPlayerService = inject(AudioPlayerService);
   public slots: SlotInterface[] = [];
 
   @HostBinding('style.backgroundImage')
@@ -35,7 +41,9 @@ export class LobbyComponent implements OnInit {
         if (lobbyData) {
           this.backgroundImage = `url(${lobbyData.backgroundImage})`;
           this.slots = lobbyData.slots;
+
+          this.audioPlayerService.setSource(lobbyData.backgroundMusic);
         }
-      })
+      });
   }
 }

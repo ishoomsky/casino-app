@@ -1,0 +1,34 @@
+<div class="carousel">
+  <div #wrapperRef class="carousel-wrapper">
+    <app-slot-machines-carousel-item
+      *ngFor="let slot of slots"
+      #slotRefs
+      [slot]="slot"
+    />
+  </div>
+</div>
+
+<button
+  class="carousel-control carousel-control-left"
+  [appImageButton]="'/images/lobby/arrow-left.png'"
+  [width]="'35'"
+  [height]="'51'"
+  (click)="scrollBack()"
+></button>
+<button
+  class="carousel-control carousel-control-right"
+  [appImageButton]="'/images/lobby/arrow-right.png'"
+  [width]="'35'"
+  [height]="'51'"
+  (click)="scrollForward()"></button>
+
+<div class="dots-container">
+  <button
+    *ngFor="let dot of dots; let i = index"
+      class="dot"
+      [appImageButton]="i === activeDotIndex ? '/images/lobby/bullet-on.png' : '/images/lobby/bullet-off.png'"
+      [width]="'33'"
+      [height]="'33'"
+      (click)="onDotClick(i)">
+  </button>
+</div>

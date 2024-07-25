@@ -1,0 +1,24 @@
+.image-container {
+  position: relative;
+
+
+  .jackpot-container {
+    position: absolute;
+    z-index: 2;
+    top: 25px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    .jackpot-value {
+      color: white;
+    }
+  }
+}
+
+.image-container:hover {
+  img {
+    filter: drop-shadow(5px 5px 5px #FFFFFF);
+    cursor: pointer;
+  }
+}
