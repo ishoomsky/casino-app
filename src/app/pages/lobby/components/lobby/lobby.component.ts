@@ -2,7 +2,7 @@ import {
   Component,
   DestroyRef,
   HostBinding,
-  inject,
+  inject, OnDestroy,
   OnInit,
 } from '@angular/core';
 import { NgStyle } from "@angular/common";
@@ -27,7 +27,7 @@ import {
   styleUrl: './lobby.component.scss',
   providers: [LobbyService, AudioPlayerService],
 })
-export class LobbyComponent implements OnInit {
+export class LobbyComponent implements OnInit, OnDestroy {
   private lobbyService = inject(LobbyService);
   private destroyRef = inject(DestroyRef);
   public audioPlayerService = inject(AudioPlayerService);
@@ -48,5 +48,9 @@ export class LobbyComponent implements OnInit {
           this.audioPlayerService.setSource(lobbyData.backgroundMusic);
         }
       });
+  }
+
+  ngOnDestroy(): void {
+    this.audioPlayerService.cleanup();
   }
 }
