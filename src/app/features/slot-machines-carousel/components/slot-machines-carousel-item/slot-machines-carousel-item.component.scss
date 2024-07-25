@@ -1,24 +1,37 @@
-.image-container {
+.carousel-item {
   position: relative;
 
-
-  .jackpot-container {
+  .carousel-item-jackpot {
     position: absolute;
     z-index: 2;
-    top: 25px;
     width: 100%;
     display: flex;
     justify-content: center;
 
-    .jackpot-value {
+    &-value {
       color: white;
+      font-family: 'CorpoSansSemiBold';
+      font-size: 15px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     }
   }
-}
 
-.image-container:hover {
-  img {
-    filter: drop-shadow(5px 5px 5px #FFFFFF);
-    cursor: pointer;
+  .carousel-item-badge {
+    position: absolute;
+    width: 193px;
+    z-index: 2;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &:not(.locked):hover {
+    .carousel-item-image {
+      filter: drop-shadow(5px 5px 5px #FFFFFF);
+      cursor: pointer;
+    }
+  }
+
+  &.locked .carousel-item-image {
+    filter: grayscale(100%);
   }
 }

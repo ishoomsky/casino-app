@@ -1,14 +1,28 @@
-<div class="image-container">
-  @if (slot.jackpot) {
-    <div class="jackpot-container">
-      <span
-        class="jackpot-value"
-        [appAnimateNumber]="slot.jackpot"
-        [duration]="1200"
-      >
-<!--        {{ | commaSeparatorFormatter}}-->
-      </span>
-    </div>
-  }
-  <img [src]="slot.image" [alt]="slot.name">
+<div class="carousel-item" [ngClass]="{'locked': slot.isLocked}">
+  <ng-container [ngTemplateOutlet]="jackpotTemplate"/>
+  <ng-container
+    *ngIf="slot.isLocked"
+    [ngTemplateOutlet]="isLocketBadgeTemplate"
+  />
+  <img class="carousel-item-image" [src]="slot.image" [alt]="slot.name">
 </div>
+
+<ng-template #jackpotTemplate>
+  <div
+    *ngIf="slot.jackpot"
+    class="carousel-item-jackpot"
+    [ngStyle]="{'top': jackpotBadgePositions[slot.id].top  + 'px'}"
+  >
+    <span
+      class="carousel-item-jackpot-value"
+      [appAnimateNumber]="slot.jackpot"
+      [duration]="1200"></span>
+  </div>
+</ng-template>
+
+<ng-template #isLocketBadgeTemplate>
+  <img
+    src="/images/lobby/lock.png"
+    class="carousel-item-badge"
+    alt="The slot is locked now"/>
+</ng-template>
