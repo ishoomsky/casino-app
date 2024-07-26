@@ -20,12 +20,21 @@
 }
 
 .button-spin {
-  @include slot-absolute-item;
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  border: none;
+  background-color: transparent;
   width: calc(100% / 8.3);
   aspect-ratio: 236 / 114;
   background-image: url('/images/slot/but_spin_bg.png');
   bottom: 12%;
   left: 63%;
+
+  &:not([disabled]):hover {
+    @include drop-shadow;
+  }
 }
 
 .button-bet-minus {
@@ -178,5 +187,111 @@
       top: 76%;
       left: 12.8%;
     }
+  }
+}
+
+
+.reels {
+  position: absolute;
+  //background-color: red;
+  width: 7.1%;
+  aspect-ratio: 0.33 / 1;
+  bottom: 26.3%;
+  overflow: hidden;
+
+  &.reels-1 {
+    left: 31%;
+  }
+  &.reels-2 {
+    left: 39.6%;
+  }
+  &.reels-3 {
+    left: 48.2%;
+  }
+  &.reels-4 {
+    left: 56.9%;
+  }
+  &.reels-5 {
+    left: 65.4%;
+  }
+
+  &-inner {
+    position: relative;
+    height: 100%;
+    width: 100%;
+
+    .symbols-active {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      height: 100%;
+      transform: translateY(0);
+
+      .image-container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+          width: 100%;
+          object-fit: contain;
+        }
+      }
+
+      &.shift-down {
+        animation: shift-down-active .2s linear forwards;
+      }
+    }
+
+    .symbols-coming {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      height: 800%;
+      transform: translateY(-100%);
+
+      .image-container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+          width: 100%;
+          object-fit: contain;
+        }
+      }
+
+      &.shift-down {
+        animation: shift-down-coming ease-out forwards;
+      }
+    }
+  }
+}
+
+@keyframes shift-down-active {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes shift-down-coming {
+  0% {
+    transform: translateY(-100%);
+    animation-timing-function: linear;
+  }
+  20% {
+    transform: translateY(-80%);
+    animation-timing-function: ease-out;
+  }
+  100% {
+    transform: translateY(0);
+    animation-timing-function: ease-in;
   }
 }

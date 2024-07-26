@@ -25,5 +25,34 @@
   <div class="button-info"></div>
   <div class="button-maxbet"></div>
   <div class="logo"></div>
-  <div class="button-spin"></div>
+  <button [disabled]="reelsRunning$ | async" class="button-spin" (click)="runSpin()"></button>
+
+  <ng-container *ngIf="reelsState">
+    <div
+      *ngFor="let reel of reelsState; let reelsIndex = index;"
+      class="reels"
+      [ngClass]="'reels-' + (reelsIndex + 1)"
+    >
+      <div class="reels-inner">
+        <div #symbolsActiveRef class="symbols-active">
+          <div
+            class="image-container"
+            *ngFor="let image of reel.active; let i = index"
+          >
+            <img [src]="image" [alt]=i>
+          </div>
+        </div>
+        <div #symbolsComingRef
+             class="symbols-coming"
+        >
+          <div
+            class="image-container"
+            *ngFor="let image of reel.coming; let i = index"
+          >
+            <img [src]="image" [alt]=i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
 </div>
