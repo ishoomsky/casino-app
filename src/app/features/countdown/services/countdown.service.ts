@@ -1,27 +1,16 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
-import { interval } from "rxjs";
-import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, interval } from 'rxjs';
 
-@Component({
-  selector: 'app-countdown',
-  standalone: true,
-  imports: [],
-  templateUrl: './countdown.component.html',
-  styleUrl: './countdown.component.scss'
+@Injectable({
+  providedIn: 'root'
 })
-export class CountdownComponent implements OnInit {
-  public timeRemaining: string = '01:00:00';
+export class AppCountdownService {
   private countdownDuration = 3600;
-  private destroyRef = inject(DestroyRef);
+  private timeRemainingSubject = new BehaviorSubject<string>('01:00:00');
+  public timeRemaining$ = this.timeRemainingSubject.asObservable();
 
-  ngOnInit(): void {
-    this.startCountdown();
-  }
-
-  private startCountdown(): void {
-    interval(1000)
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(() => {
+  public startCountdown(): void {
+    interval(1000).subscribe(() => {
       if (this.countdownDuration > 0) {
         this.countdownDuration--;
         this.updateTimeDisplay();
@@ -36,11 +25,13 @@ export class CountdownComponent implements OnInit {
     const minutes = Math.floor((this.countdownDuration % 3600) / 60);
     const seconds = this.countdownDuration % 60;
 
-    this.timeRemaining = [
+    const formattedTime = [
       hours.toString().padStart(2, '0'),
       minutes.toString().padStart(2, '0'),
       seconds.toString().padStart(2, '0')
     ].join(':');
+
+    this.timeRemainingSubject.next(formattedTime);
   }
 
   private renewTimer(): void {

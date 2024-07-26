@@ -1,0 +1,10 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/functions';
+@import '../../../../styles/mixins';
+
+:host {
+  @include glass-element;
+  padding: 8px 10px;
+  color: color-with-opacity($dark-red, 0.7);
+  font-size: 18px;
+}

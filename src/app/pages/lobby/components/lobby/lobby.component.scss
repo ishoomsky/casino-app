@@ -4,7 +4,7 @@
   @include page-background;
   gap: 30px;
 
-  .audio-player-button {
+  app-audio-player {
     position: absolute;
     top: 30px;
     left: 200px;

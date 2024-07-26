@@ -14,7 +14,7 @@ import { AudioPlayerComponent } from "../../../../features/audio-player/componen
 import {
   SlotMachinesCarouselComponent
 } from "../../../../features/slot-machines-carousel/components/slot-machines-carousel/slot-machines-carousel.component";
-import { CountdownComponent } from "../../../../features/countdown/countdown.component";
+import { CountdownComponent } from "../../../../features/countdown/components/countdown.component";
 
 @Component({
   selector: 'app-lobby',

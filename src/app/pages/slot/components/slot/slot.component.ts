@@ -3,6 +3,9 @@ import { AnimateNumberDirective } from "../../../../shared/directives/animate-nu
 import { DecimalPipe, NgForOf } from "@angular/common";
 import { NumberAbbreviationPipe } from "../../../../shared/pipes/number-abbreviation.pipe";
 import { SlotMachineComponent } from "../../../../features/slot-machine/components/slot-machine/slot-machine.component";
+import { ImageButtonDirective } from "../../../../shared/directives/image-button/image-button.directive";
+import { RouterLink } from "@angular/router";
+import { ButtonBackComponent } from "../../../../shared/components/button-back/button-back.component";
 
 @Component({
   selector: 'app-slot',
@@ -12,31 +15,12 @@ import { SlotMachineComponent } from "../../../../features/slot-machine/componen
     NgForOf,
     DecimalPipe,
     NumberAbbreviationPipe,
-    SlotMachineComponent
+    SlotMachineComponent,
+    ImageButtonDirective,
+    RouterLink,
+    ButtonBackComponent
   ],
   templateUrl: './slot.component.html',
   styleUrl: './slot.component.scss'
 })
-export class SlotComponent {
-  public jackpots: {value: number}[] = [
-    {
-      value: 500072001387,
-    },
-    {
-      value: 125100801942,
-    },
-    {
-      value: 35158403052,
-    },
-    {
-      value: 15244804717,
-    },
-    {
-      value: 4731427500,
-    }
-  ];
-
-  public numberSevenBadges =  Array(5).fill(0);
-  public totalBet = 500000000;
-  public bet = 20000000;
-}
+export class SlotComponent {}

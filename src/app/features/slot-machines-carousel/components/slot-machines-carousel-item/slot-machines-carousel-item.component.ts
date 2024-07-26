@@ -8,6 +8,11 @@ interface BadgePosition {
   top: number;
 }
 
+const jackpotBadgePositions: { [slotId: number]: BadgePosition } = {
+  1145: { top: 37 },
+  1148: { top: 46 },
+};
+
 @Component({
   selector: 'app-slot-machines-carousel-item',
   standalone: true,
@@ -25,8 +30,5 @@ interface BadgePosition {
 export class SlotMachinesCarouselItemComponent {
   @Input() slot!: SlotInterface;
 
-  public jackpotBadgePositions: { [slotId: number]: BadgePosition } = {
-    1145: { top: 37 },
-    1148: { top: 46 },
-  };
+  public jackpotBadgePositions = jackpotBadgePositions;
 }
