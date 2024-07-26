@@ -1,13 +1,16 @@
 import { Component } from '@angular/core';
 import { AnimateNumberDirective } from "../../../../shared/directives/animate-number/animate-number.directive";
-import { NgForOf } from "@angular/common";
+import { DecimalPipe, NgForOf } from "@angular/common";
+import { NumberAbbreviationPipe } from "../../../../shared/pipes/number-abbreviation.pipe";
 
 @Component({
   selector: 'app-slot',
   standalone: true,
   imports: [
     AnimateNumberDirective,
-    NgForOf
+    NgForOf,
+    DecimalPipe,
+    NumberAbbreviationPipe
   ],
   templateUrl: './slot.component.html',
   styleUrl: './slot.component.scss'
@@ -32,5 +35,6 @@ export class SlotComponent {
   ];
 
   public numberSevenBadges =  Array(5).fill(0);
-
+  public totalBet = 500000000;
+  public bet = 20000000;
 }
