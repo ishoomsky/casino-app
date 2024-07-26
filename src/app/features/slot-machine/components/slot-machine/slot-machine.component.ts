@@ -1,23 +1,23 @@
 import { Component } from '@angular/core';
-import { AnimateNumberDirective } from "../../../../shared/directives/animate-number/animate-number.directive";
 import { DecimalPipe, NgForOf } from "@angular/common";
+import { NumberAbbreviationPipe } from "../../shared/pipes/number-abbreviation.pipe";
+import { AnimateNumberDirective } from "../../shared/directives/animate-number/animate-number.directive";
 import { NumberAbbreviationPipe } from "../../../../shared/pipes/number-abbreviation.pipe";
-import { SlotMachineComponent } from "../../../../features/slot-machine/components/slot-machine/slot-machine.component";
 
 @Component({
-  selector: 'app-slot',
+  selector: 'app-slot-machine',
   standalone: true,
   imports: [
-    AnimateNumberDirective,
-    NgForOf,
     DecimalPipe,
+    NgForOf,
     NumberAbbreviationPipe,
-    SlotMachineComponent
+    AnimateNumberDirective,
+    NumberAbbreviationPipe
   ],
-  templateUrl: './slot.component.html',
-  styleUrl: './slot.component.scss'
+  templateUrl: './slot-machine.component.html',
+  styleUrl: './slot-machine.component.scss'
 })
-export class SlotComponent {
+export class SlotMachineComponent {
   public jackpots: {value: number}[] = [
     {
       value: 500072001387,
@@ -35,7 +35,6 @@ export class SlotComponent {
       value: 4731427500,
     }
   ];
-
   public numberSevenBadges =  Array(5).fill(0);
   public totalBet = 500000000;
   public bet = 20000000;
