@@ -34,7 +34,10 @@
       [ngClass]="'reels-' + (reelsIndex + 1)"
     >
       <div class="reels-inner">
-        <div #symbolsActiveRef class="symbols-active">
+        <div #symbolsActiveRef
+             class="symbols-active"
+             [ngStyle]="{'animation-duration': activeReelsSpinAnimationDuration + 'ms'}"
+        >
           <div
             class="image-container"
             *ngFor="let image of reel.active; let i = index"
@@ -44,6 +47,7 @@
         </div>
         <div #symbolsComingRef
              class="symbols-coming"
+             [ngStyle]="{'height': comingReelsHeight}"
         >
           <div
             class="image-container"

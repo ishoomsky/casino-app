@@ -241,7 +241,7 @@
       }
 
       &.shift-down {
-        animation: shift-down-active .2s linear forwards;
+        animation: shift-down-active linear forwards;
       }
     }
 
@@ -250,7 +250,6 @@
       display: flex;
       flex-direction: column;
       justify-content: space-around;
-      height: 800%;
       transform: translateY(-100%);
 
       .image-container {

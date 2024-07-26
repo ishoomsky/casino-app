@@ -19,20 +19,6 @@ interface ReelInterface {
   active: string[],
 }
 
-interface ReelsInterface {
-  firstReel: ReelInterface;
-  secondReel: ReelInterface;
-  thirdReel: ReelInterface;
-  fourthReel: ReelInterface;
-  fifthReel: ReelInterface;
-}
-
-interface ReelItem {
-  key: string;
-  coming: string[];
-  active: string[];
-}
-
 const symbols = [
   '/images/slot/symbol_1.png',
   '/images/slot/symbol_2.png',
@@ -92,8 +78,11 @@ export class SlotMachineComponent implements OnInit {
   public totalBet = 500000000;
   public bet = 20000000;
 
-  public comingReelsSpinTiming = 5000;
-  public activeReelsSpinTiming = 500;
+  public comingReelsSpinAnimationDuration = 2000;
+  public activeReelsSpinAnimationDuration = 300;
+  public comingReelsRows = 24;
+  public readonly activeReelsRows = 3;
+  public comingReelsHeight = this.comingReelsRows / 3 * 100 + '%';
 
   public reelsState: ReelInterface[] = [
     {
@@ -117,41 +106,18 @@ export class SlotMachineComponent implements OnInit {
       active: [],
     }
   ];
-
   public reelsRunning$ = new BehaviorSubject<boolean>(false);
 
   private renderer = inject(Renderer2);
   private cdr = inject(ChangeDetectorRef);
 
   ngOnInit(): void {
-    this.setActiveReels();
+    this.initializeActiveReelsState();
   }
-
-  private setActiveReels(): void {
-    this.reelsState = this.reelsState.map((reel) => ({
-      ...reel,
-      active: this.getRandomSymbols(symbols, 3)
-    }));
-  }
-
-  private resetReels(): void {
-    this.reelsState = this.resetSlotData(this.reelsState);
-
-    this.activeReelsRef.forEach((elementRef) => {
-      const activeReelsElement = elementRef.nativeElement;
-      this.renderer.removeClass(activeReelsElement, 'shift-down');
-    });
-
-    this.comingReelsRef.forEach((elementRef) => {
-      const comingReelsElement = elementRef.nativeElement;
-      this.renderer.removeClass(comingReelsElement, 'shift-down');
-    });
-  }
-
 
   public async runSpin(): Promise<void> {
     this.reelsRunning$.next(true);
-    this.generateComingReels();
+    this.generateComingReelsState();
     this.cdr.detectChanges();
 
     await Promise.all([
@@ -162,59 +128,54 @@ export class SlotMachineComponent implements OnInit {
     this.resetReels();
   }
 
-  private generateComingReels(): void {
+  private initializeActiveReelsState(): void {
     this.reelsState = this.reelsState.map((reel) => ({
       ...reel,
-      coming: this.getRandomSymbols(symbols, 24)
+      active: this.getRandomSymbols(symbols, this.activeReelsRows)
     }));
-  };
+  }
 
+  private generateComingReelsState(): void {
+    this.reelsState = this.reelsState.map((reel) => ({
+      ...reel,
+      coming: this.getRandomSymbols(symbols, this.comingReelsRows)
+    }));
+  }
 
   private spinActiveReels(): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
-      if (!this.activeReelsRef) {
-        reject(new Error('No active reels reference available'));
-        return;
-      }
-
-      const animationPromises = this.activeReelsRef.map((elementRef: ElementRef) => {
-        return new Promise<void>((resolve) => {
-          const activeReelsElement = elementRef.nativeElement;
-          this.renderer.addClass(activeReelsElement, 'shift-down');
-
-          const onAnimationEnd = () => {
-            activeReelsElement.removeEventListener('animationend', onAnimationEnd);
-            resolve();
-          };
-          activeReelsElement.addEventListener('animationend', onAnimationEnd);
-        });
-      });
-
-      Promise.all(animationPromises)
-        .then(() => resolve())
-        .catch(err => reject(err));
-    });
-  };
+    return this.runAnimation(this.activeReelsRef, 'shift-down');
+  }
 
   private spinComingReels(): Promise<void> {
+    return this.runAnimation(this.comingReelsRef, 'shift-down', (element: HTMLElement) => {
+      this.renderer.setStyle(element, 'animation-duration', (this.comingReelsSpinAnimationDuration + (200 * getRandomNumberInRange(0, this.comingReelsRef.length))) + 'ms');
+    });
+  }
+
+  private runAnimation(
+    elementsRef: QueryList<ElementRef>,
+    animationClass: string,
+    styleUpdates: (element: HTMLElement) => void = () => {}
+  ): Promise<void> {
     return new Promise<void>((resolve, reject) => {
-      if (!this.comingReelsRef) {
-        reject(new Error('No coming reels reference available'));
+      if (elementsRef.length === 0) {
+        reject(new Error('No elements reference available'));
         return;
       }
 
-      const animationPromises = this.comingReelsRef.map((elementRef: ElementRef, elementIndex) => {
+      const elements = elementsRef.toArray();
+      const animationPromises = elements.map((elementRef: ElementRef) => {
         return new Promise<void>((resolve) => {
-          const comingReelsElement = elementRef.nativeElement;
-          this.renderer.setStyle(comingReelsElement, 'animation-duration', (2000 + 200 * getRandomNumberInRange(0, elementIndex)) + 'ms');
-          this.renderer.addClass(comingReelsElement, 'shift-down');
+          const element = elementRef.nativeElement as HTMLElement;
+          styleUpdates(element);
+          this.renderer.addClass(element, animationClass);
 
           const onAnimationEnd = () => {
-            comingReelsElement.removeEventListener('animationend', onAnimationEnd);
+            element.removeEventListener('animationend', onAnimationEnd);
             resolve();
           };
 
-          comingReelsElement.addEventListener('animationend', onAnimationEnd);
+          element.addEventListener('animationend', onAnimationEnd);
         });
       });
 
@@ -222,7 +183,39 @@ export class SlotMachineComponent implements OnInit {
         .then(() => resolve())
         .catch(err => reject(err));
     });
-  };
+  }
+
+  private resetReels(): void {
+    this.resetSlotData();
+    this.resetActiveReels();
+    this.resetComingReels();
+  }
+
+  private resetSlotData(): void {
+    this.reelsState = this.reelsState.map(item => {
+      const updatedActive = item.coming.slice(0, this.activeReelsRows);
+
+      return {
+        ...item,
+        active: updatedActive,
+        coming: []
+      };
+    });
+  }
+
+  private resetActiveReels(): void {
+    this.activeReelsRef.forEach((elementRef) => {
+      const activeReelsElement = elementRef.nativeElement;
+      this.renderer.removeClass(activeReelsElement, 'shift-down');
+    });
+  }
+
+  private resetComingReels(): void {
+    this.comingReelsRef.forEach((elementRef) => {
+      const comingReelsElement = elementRef.nativeElement;
+      this.renderer.removeClass(comingReelsElement, 'shift-down');
+    });
+  }
 
   private getRandomSymbols(symbols: string[], quantity: number): string[] {
     const extendedSymbols = [];
@@ -231,17 +224,5 @@ export class SlotMachineComponent implements OnInit {
     }
     const shuffled = extendedSymbols.slice().sort(() => 0.5 - Math.random());
     return shuffled.slice(0, quantity);
-  }
-
-  private resetSlotData(reelsData: ReelInterface[]): ReelInterface[] {
-    return reelsData.map(item => {
-      const updatedActive = item.coming.slice(0, 3);
-
-      return {
-        ...item,
-        active: updatedActive,
-        coming: []
-      };
-    });
   }
 }
