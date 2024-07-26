@@ -1,3 +1,5 @@
+@import '../../../../../styles/mixins';
+
 .carousel-item {
   position: relative;
 
@@ -26,8 +28,7 @@
 
   &:not(.locked):hover {
     .carousel-item-image {
-      filter: drop-shadow(7px 7px 7px #FFFFFF);
-      cursor: pointer;
+      @include drop-shadow;
     }
   }
 

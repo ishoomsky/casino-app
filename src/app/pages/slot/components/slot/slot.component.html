@@ -1,1 +1,32 @@
-<p>slot works!</p>
+<div class="slot-machine">
+  <div class="slot-machine-inner">
+    <div class="jackpots-info">
+      <div class="jackpots-info-inner">
+        <div
+          *ngFor="let jackpot of jackpots; let i = index"
+          class="jackpot-info"
+          [appAnimateNumber]="jackpot.value"
+          [duration]="4000 - (500 * i)"></div>
+      </div>
+    </div>
+
+    <div class="number-seven-badges">
+      <div class="number-seven-badges-inner">
+        <div
+          *ngFor="let _ of numberSevenBadges;"
+          class="number-seven-badge">
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="button-bet-minus"></div>
+    <div class="button-bet-plus"></div>
+    <div class="button-info"></div>
+    <div class="button-maxbet"></div>
+    <div class="logo"></div>
+    <div class="button-spin"></div>
+  </div>
+</div>
+
