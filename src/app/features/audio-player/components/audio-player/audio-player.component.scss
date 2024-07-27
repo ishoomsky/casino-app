@@ -4,9 +4,7 @@
 
 :host {
   @include glass-element;
-  position: absolute;
-  top: 30px;
-  left: 200px;
+
   max-width: 46px;
   z-index: 2;
 }

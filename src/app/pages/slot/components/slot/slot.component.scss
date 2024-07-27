@@ -4,4 +4,50 @@
   @include page-background;
   background-image: url('/images/slot/game_background.jpg');
   position: relative;
+
+  app-audio-player {
+    position: absolute;
+    top: 30px;
+    left: 200px;
+  }
+
+  app-countdown {
+    position: absolute;
+    top: 30px;
+    right: 200px;
+  }
+
+  app-button-back {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    z-index: 3;
+  }
+}
+
+
+@media (max-width: 899px) {
+  :host {
+    background-position-x: 70%;
+    padding: 0 10px;
+
+    app-audio-player {
+      position: absolute;
+      top: 20px;
+      left: 120px;
+    }
+
+    app-countdown {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    app-button-back {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 3;
+    }
+  }
 }

@@ -4,10 +4,32 @@
   @include page-background;
   gap: 30px;
 
+  app-audio-player {
+    position: absolute;
+    top: 30px;
+    left: 200px;
+  }
 
   app-countdown {
     position: absolute;
     top: 30px;
     right: 200px;
+  }
+}
+
+@media (max-width: 899px) {
+  :host {
+    background-position-x: 70%;
+    app-audio-player {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+
+    app-countdown {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
   }
 }

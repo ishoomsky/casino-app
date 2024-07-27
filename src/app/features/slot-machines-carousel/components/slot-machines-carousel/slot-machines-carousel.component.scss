@@ -1,14 +1,13 @@
 :host {
-  width: 900px;
   padding: 0 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   position: relative;
 
   .carousel {
     overflow-x: hidden;
-    max-width: 800px;
 
     .carousel-wrapper {
       display: grid;

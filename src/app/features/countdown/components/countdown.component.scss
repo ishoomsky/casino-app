@@ -4,9 +4,6 @@
 
 :host {
   @include glass-element;
-  position: absolute;
-  top: 30px;
-  right: 200px;
 
   padding: 8px 10px;
   color: color-with-opacity($white, 0.7);

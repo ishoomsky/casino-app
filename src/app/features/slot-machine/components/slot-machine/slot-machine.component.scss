@@ -295,3 +295,10 @@
     animation-timing-function: ease-in;
   }
 }
+
+@media (max-width: 1200px) {
+  :host {
+    width: 209%;
+    left: 46%;
+  }
+}

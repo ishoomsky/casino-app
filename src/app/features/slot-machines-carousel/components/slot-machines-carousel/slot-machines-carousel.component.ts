@@ -1,9 +1,19 @@
-import { Component, ElementRef, Input, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef, inject,
+  Input,
+  OnChanges,
+  OnInit,
+  QueryList, Renderer2,
+  ViewChild,
+  ViewChildren
+} from '@angular/core';
 import { SlotInterface } from "../../../../shared/types/slot.interface";
 import {
   SlotMachinesCarouselItemComponent
 } from "../slot-machines-carousel-item/slot-machines-carousel-item.component";
-import { NgForOf } from "@angular/common";
+import { NgForOf, NgStyle } from "@angular/common";
 import { ImageButtonDirective } from "../../../../shared/directives/image-button/image-button.directive";
 
 @Component({
@@ -13,23 +23,52 @@ import { ImageButtonDirective } from "../../../../shared/directives/image-button
     SlotMachinesCarouselItemComponent,
     NgForOf,
     ImageButtonDirective,
+    NgStyle,
   ],
   templateUrl: './slot-machines-carousel.component.html',
   styleUrl: './slot-machines-carousel.component.scss'
 })
-export class SlotMachinesCarouselComponent implements OnInit {
+export class SlotMachinesCarouselComponent implements OnChanges {
   @Input() slots: SlotInterface[] = [];
 
   @ViewChild('wrapperRef') wrapperRef!: ElementRef;
   @ViewChildren('slotRefs', {read: ElementRef}) slotRefs!: QueryList<ElementRef>;
   private totalScroll = 0;
-  private perView = 4;
+  private perView!: number;
+  private renderer = inject(Renderer2);
+  private elementRef = inject(ElementRef);
 
   public activeDotIndex = 0;
   public dots: number[] = [];
+  public carouselMaxWidth!: number;
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
+    this.setupComponent();
+
+  }
+
+  private setupComponent() {
+    const globalWidth = window.innerWidth;
+    if (globalWidth < 700) {
+      this.perView = 1;
+      this.renderer.setStyle(this.elementRef.nativeElement, 'maxWidth', 300);
+      this.carouselMaxWidth = 200;
+    }
+    if (globalWidth >= 700 && globalWidth <= 1000) {
+      this.perView = 3;
+      this.renderer.setStyle(this.elementRef.nativeElement, 'maxWidth', 500);
+      this.carouselMaxWidth = 600;
+    }
+
+    if (globalWidth > 1001) {
+      this.perView = 4;
+      this.renderer.setStyle(this.elementRef.nativeElement, 'maxWidth', 900);
+      this.carouselMaxWidth = 800;
+    }
+
+
     this.dots = Array(Math.ceil(this.slots.length / this.perView)).fill(0);
+
   }
 
   private updateScrollPosition(): void {

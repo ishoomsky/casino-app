@@ -1,4 +1,4 @@
-<div class="carousel">
+<div class="carousel" [ngStyle]="{'width': carouselMaxWidth + 'px'}">
   <div #wrapperRef class="carousel-wrapper">
     <app-slot-machines-carousel-item
       *ngFor="let slot of slots"

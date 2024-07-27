@@ -8,7 +8,7 @@ import { DecimalPipe } from '@angular/common';
 })
 export class AnimateNumberDirective implements OnChanges {
   @Input() appAnimateNumber!: number;
-  @Input() duration: number = 2000; // Продолжительность анимации в миллисекундах
+  @Input() duration: number = 2000;
 
   private startValue: number = 0;
   private currentValue: number = 0;
