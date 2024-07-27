@@ -27,9 +27,9 @@ import { CountdownComponent } from "../../../../features/countdown/components/co
   ],
   templateUrl: './lobby.component.html',
   styleUrl: './lobby.component.scss',
-  providers: [LobbyService, AudioPlayerService],
+  providers: [LobbyService],
 })
-export class LobbyComponent implements OnInit, OnDestroy {
+export class LobbyComponent implements OnInit {
   private lobbyService = inject(LobbyService);
   private destroyRef = inject(DestroyRef);
   public audioPlayerService = inject(AudioPlayerService);
@@ -46,13 +46,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
           this.backgroundImage = `url(${lobbyData.backgroundImage})`;
           this.slots = lobbyData.slots
             .sort((slotA, slotB) => slotA.order - slotB.order);
-
-          this.audioPlayerService.setSource(lobbyData.backgroundMusic);
         }
       });
-  }
-
-  ngOnDestroy(): void {
-    this.audioPlayerService.cleanup();
   }
 }

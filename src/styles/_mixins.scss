@@ -33,14 +33,6 @@
   @content;
 }
 
-@mixin button-back-absolute {
-  position: absolute;
-  top: 30px;
-  left: 30px;
-  z-index: 3;
-  @content;
-}
-
 // lobby
 
 @mixin glass-element {

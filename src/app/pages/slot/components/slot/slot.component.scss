@@ -4,8 +4,4 @@
   @include page-background;
   background-image: url('/images/slot/game_background.jpg');
   position: relative;
-
-  app-button-back {
-    @include button-back-absolute;
-  }
 }

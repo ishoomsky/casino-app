@@ -1,5 +1,4 @@
 import { AppCountdownService } from "../services/countdown.service";
-import { Observable } from "rxjs";
 import { Component, inject } from "@angular/core";
 import { AsyncPipe } from "@angular/common";
 

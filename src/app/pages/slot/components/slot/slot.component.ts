@@ -6,6 +6,8 @@ import { SlotMachineComponent } from "../../../../features/slot-machine/componen
 import { ImageButtonDirective } from "../../../../shared/directives/image-button/image-button.directive";
 import { RouterLink } from "@angular/router";
 import { ButtonBackComponent } from "../../../../shared/components/button-back/button-back.component";
+import { AudioPlayerComponent } from "../../../../features/audio-player/components/audio-player/audio-player.component";
+import { CountdownComponent } from "../../../../features/countdown/components/countdown.component";
 
 @Component({
   selector: 'app-slot',
@@ -18,7 +20,9 @@ import { ButtonBackComponent } from "../../../../shared/components/button-back/b
     SlotMachineComponent,
     ImageButtonDirective,
     RouterLink,
-    ButtonBackComponent
+    ButtonBackComponent,
+    AudioPlayerComponent,
+    CountdownComponent
   ],
   templateUrl: './slot.component.html',
   styleUrl: './slot.component.scss'

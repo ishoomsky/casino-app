@@ -4,11 +4,6 @@
   @include page-background;
   gap: 30px;
 
-  app-audio-player {
-    position: absolute;
-    top: 30px;
-    left: 200px;
-  }
 
   app-countdown {
     position: absolute;
